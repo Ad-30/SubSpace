@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const _ = require('lodash');
-
+require('dotenv').config();
 const app = express();
 let blogs;
 let blogStatsCache;
@@ -12,7 +12,7 @@ async function fetchBlogsData() {
   try {
     const response = await axios.get('https://intent-kit-16.hasura.app/api/rest/blogs', {
       headers: {
-        'x-hasura-admin-secret': '32qR4KmXOIpsGPQKMqEJHGJS27G5s7HdSKO3gdtQd2kv5e852SiYwWNfxkZOBuQ6',
+        'x-hasura-admin-secret': process.env.BLOG_API_SECRET,
       },
     });
     blogs = response.data.blogs;
